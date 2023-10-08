@@ -1,14 +1,22 @@
 import React from "react";
 import styles from "./styles";
 import Task from "./Task/Task";
-import { View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { View, Text } from "react-native";
 
 
-export default Tasks = () => {
+const Tasks = (props) => {
     return (
         <View style={styles.container}>
-            <Task/>
+            {props.tasks.map((task, id) => (
+               <Task 
+               key={id} 
+               task={task} 
+               handleEdit={props.handleEdit} 
+               handleDelete={props.handleDelete} 
+            />
+            ))}
         </View>
     )
 }
+
+export default Tasks

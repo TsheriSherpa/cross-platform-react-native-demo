@@ -48,7 +48,11 @@ export default function App() {
 		<View style={styles.container}>
 			<StatusBar style="auto" />
 			<Header setModalVisible={setModalVisible} />
-			<Tasks tasks={tasks} handleEdit={handleEdit} handleDelete={handleDelete} />
+			<Tasks 
+				tasks={tasks} 
+				handleEdit={handleEdit} 
+				handleDelete={handleDelete}
+			/>
 			<Form
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}

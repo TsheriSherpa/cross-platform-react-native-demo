@@ -11,7 +11,7 @@ import styles from './styles';
 import { AntDesign } from '@expo/vector-icons';
 
 
-const Form = (props) => {console.log(props.task)
+const Form = (props) => {
 
     const [taskDone, setTaskDone] = useState(props.task ? props.task.taskDone : false);
     const [taskDescription, setTaskDescription] = useState('');
