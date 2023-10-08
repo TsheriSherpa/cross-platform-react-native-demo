@@ -1,1 +1,1 @@
-# cross-platform-react-native-demo
+This is react native cross platform app demo.
