@@ -1,20 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
+import Header from "./src/components/Header/Header";
+import Form from "./src/components/Form/Form";
+import Tasks from "./src/components/Tasks/Tasks";
+import styles from "./src/styles/main";
+import uuid from 'react-uuid';
+import { useState } from 'react';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	const [taskToEdit, setTaskToEdit] = useState(false);
+	const [tasks, setTasks] = useState([])
+	const [modalVisible, setModalVisible] = useState(false)
+
+	const handleAddTask = (taskDescription, taskDone, id = false) => {
+
+		if (id) {
+			setTasks(tasks =>
+				tasks.map(task =>
+					task.id == id ? { ...task, description: description, done: taskDone } : task
+				)
+			);
+		} else {
+			const updatedTasks = [...tasks];
+			updatedTasks.push(
+				{
+					id: uuid(),
+					description: taskDescription,
+					done: taskDone
+				}
+			)
+
+			setTasks(updatedTasks)
+		}
+	}
+
+	const handleEdit = (id) => {
+		setTaskToEdit(tasks.filter(task => task.id == id)[0])
+		setModalVisible(!modalVisible)
+	}
+
+	const handleDelete = (id) => {
+		setTasks(tasks => tasks.filter(task => task.id != id))
+	}
+
+	return (
+		<View style={styles.container}>
+			<StatusBar style="auto" />
+			<Header setModalVisible={setModalVisible} />
+			<Tasks tasks={tasks} handleEdit={handleEdit} handleDelete={handleDelete} />
+			<Form
+				modalVisible={modalVisible}
+				setModalVisible={setModalVisible}
+				onAddTask={handleAddTask}
+				task={taskToEdit}
+			/>
+		</View>
+	);
+}
