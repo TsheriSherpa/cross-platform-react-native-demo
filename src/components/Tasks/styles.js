@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'lightgrey',
     },
+    body: {
+        display: 'flex',
+        alignItems: 'center',
+    }
 });
 
 export default styles;
