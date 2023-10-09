@@ -37,6 +37,7 @@ const Form = (props) => {
             }
             setTaskDone(false);
             setTaskDescription("");
+            setErrorMessage('')
             props.setModalVisible(false);
         }
         else {
@@ -67,7 +68,10 @@ const Form = (props) => {
                     color="black"
                     name="closecircleo"
                     style={styles.closeIcon}
-                    onPress={() => props.setModalVisible(!props.modalVisible)}
+                    onPress={() => {
+                        setErrorMessage('')
+                        props.setModalVisible(!props.modalVisible)
+                    }}
                 />
             </View>
 
@@ -95,7 +99,7 @@ const Form = (props) => {
                 <Button style={styles.addButton} title='SAVE' onPress={handleAddPress} />
             
                 {errorMessage && (
-                    <View>
+                    <View style={styles.errorMessageView}>
                         <Text style={styles.errorMessage}>Attention: {errorMessage} </Text>
                     </View>
                 )}
