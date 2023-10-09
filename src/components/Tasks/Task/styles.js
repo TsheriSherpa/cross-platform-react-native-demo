@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: 'red'
     },
     title: {
         marginTop: 10,
         fontWeight: 'bold',
+        fontSize: 15
     },
     editIcon: {
         marginRight: 20
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     body: {
         padding: 10,
-        marginTop: 20
+        marginTop: 10
     }
 });
 
