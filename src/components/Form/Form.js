@@ -12,26 +12,25 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 const Form = (props) => {
-
-    const [taskDone, setTaskDone] = useState(props.task ? props.task.taskDone : false);
+    const [taskDone, setTaskDone] = useState(false);
     const [taskDescription, setTaskDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
     const toggleSwitch = () => setTaskDone((previousState) => !previousState);
 
-    // useEffect(() => {
-    //     console.log(props.task)
-    //     if (props.task) {
-    //         setTaskDone(props.task.done)
-    //         setTaskDescription(props.task.description)
-    //     }
-    // }, [])
+    useEffect(() => {
+        console.log(props.task)
+        if (props.task) {
+            setTaskDone(props.task.done)
+            setTaskDescription(props.task.description)
+        }
+    }, [props.task])
 
 
 
     const handleAddPress = () => {
         if (taskDescription) {
             if (props.task) {
-                props.onAddTask(taskDescription, props.task.id);
+                props.onAddTask(taskDescription, taskDone, props.task.id);
             }else{
                 props.onAddTask(taskDescription, taskDone);
             }
@@ -80,10 +79,9 @@ const Form = (props) => {
                     placeholder='Enter a task description'
                     maxLength={150}
                     onChangeText={handleDescriptionChange}
-                    defaultValue={taskDescription}
                     style={styles.input}
                     activeUnderlineColor="green"
-                    value={props.task ? props.task.description : taskDescription}
+                    value={taskDescription}
                 />
                 <View style={styles.switchSection}>
                     <Text style={{ fontWeight: "bold" }}>Task Completed:</Text>
@@ -93,7 +91,7 @@ const Form = (props) => {
                         thumbColor={taskDone ? '#f5dd4b' : '#f4f3f4'}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleSwitch}
-                        value={props.task ? props.task.done : taskDone}
+                        value={taskDone}
                     />
                 </View>
                 <Button style={styles.addButton} title='SAVE' onPress={handleAddPress} />

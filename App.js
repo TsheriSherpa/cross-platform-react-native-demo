@@ -13,7 +13,7 @@ export default function App() {
 	const [tasks, setTasks] = useState([])
 	const [modalVisible, setModalVisible] = useState(false)
 
-	const handleAddTask = (taskDescription, taskDone, id = false) => {
+	const handleAddTask = (description, taskDone, id = false) => {
 
 		if (id) {
 			setTasks(tasks =>
@@ -26,7 +26,7 @@ export default function App() {
 			updatedTasks.push(
 				{
 					id: uuid(),
-					description: taskDescription,
+					description: description,
 					done: taskDone
 				}
 			)
