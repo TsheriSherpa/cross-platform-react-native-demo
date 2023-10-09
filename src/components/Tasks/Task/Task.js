@@ -38,10 +38,10 @@ const Task = (props) => {
                         style={styles.closeIcon}
                     />
                 </View>
+                <Text  style={styles.label}>Description: 
+                    <Text style={styles.bodyText}>{props.task.description}</Text>
+                </Text>
             </View>
-           <Text  style={styles.label}>Description: 
-                <Text style={styles.bodyText}>{props.task.description}</Text>
-            </Text>
         </View>
     )
 }

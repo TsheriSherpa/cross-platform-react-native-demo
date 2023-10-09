@@ -6,15 +6,15 @@ import { View, Text, ScrollView } from "react-native";
 
 const Tasks = (props) => {
     return (
-        <ScrollView>
-            <View style={styles.container}>
+        <ScrollView style={styles.container}>
+            <View style={styles.body}>
                 {props.tasks.map((task, id) => (
                 <Task 
-                        key={id} 
-                        index={id}
-                        task={task} 
-                        handleEdit={props.handleEdit} 
-                        handleDelete={props.handleDelete} 
+                    key={id} 
+                    index={id}
+                    task={task} 
+                    handleEdit={props.handleEdit} 
+                    handleDelete={props.handleDelete} 
                 />
                 ))}
             </View>

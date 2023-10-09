@@ -2,15 +2,26 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
         backgroundColor: "dimgrey",
         marginBottom: 10,
+        borderRadius: 15,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 5,
+        width: "100%",
+        height: 160
     },
     header: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        backgroundColor: 'grey',
+        padding: 15
     },
     headerIconView: {
         display: 'flex',
@@ -38,6 +49,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     body: {
+        padding: 10,
         marginTop: 20
     }
 });
