@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10,
         alignSelf: 'stretch',
+        height: 60,
+        alignItems: 'center'
 
     },
 
@@ -19,8 +21,6 @@ const styles = StyleSheet.create({
     leftSideHeader: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'space-between',
-        width: '50%',
     },
     
     title: {

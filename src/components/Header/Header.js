@@ -11,7 +11,7 @@ const Header = (props) => {
                 <Text style={styles.title}>Todo App</Text>
             </View>
             <View style={styles.rightSideHeader}>
-                <FontAwesome5 name="tasks" size={28} onPress={() => props.setModalVisible(true)}/>
+                <FontAwesome5 name="plus" size={28} onPress={() => props.setModalVisible(true)}/>
             </View>
         </View>
     )

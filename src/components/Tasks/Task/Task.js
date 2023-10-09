@@ -7,7 +7,7 @@ const Task = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.title}>ID: {props.task.id.substring(0,8)}</Text>
+                <Text style={styles.title}>Task {props.index + 1}</Text>
                 <View style={styles.headerIconView}>
                     <AntDesign
                         size={24}
@@ -25,8 +25,23 @@ const Task = (props) => {
                     />
                 </View>
             </View>
-           <Text>Status: {props.task.taskDone}</Text>
-           <Text>Description: {props.task.description}</Text>
+            <View style={styles.body}>
+                <Text style={styles.label}>ID: 
+                    <Text style={styles.bodyText}>{props.task.id}</Text>
+                </Text>
+                <View style={styles.statusView}>
+                    <Text style={styles.label}>Status: </Text>
+                    <Ionicons
+                        size={24}
+                        color="black"
+                        name={props.task.done ? "checkmark-done" : "ios-time-outline"}
+                        style={styles.closeIcon}
+                    />
+                </View>
+            </View>
+           <Text  style={styles.label}>Description: 
+                <Text style={styles.bodyText}>{props.task.description}</Text>
+            </Text>
         </View>
     )
 }

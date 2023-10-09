@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
         padding: 20
     },  
     header: {
+        height: 60,
         padding: 15,
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: 'green',
+        backgroundColor: 'grey',
         justifyContent: 'space-between'
     },
 
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     },  
 
     title: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
     },
 
