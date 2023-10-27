@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Modal,
     Text,
     TextInput,
     View,
@@ -8,7 +7,8 @@ import {
     Button
 } from 'react-native';
 import styles from './styles';
-import { AntDesign } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Form = (props) => {
@@ -16,19 +16,13 @@ const Form = (props) => {
     const [taskDescription, setTaskDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
     const toggleSwitch = () => setTaskDone((previousState) => !previousState);
-    
+
     useEffect(() => {
         if (props.task) {
             setTaskDone(props.task.done)
             setTaskDescription(props.task.description)
         }
-
-        return () => {
-            props.task = null;
-        }
-        
     }, [props.task])
-
 
     const handleAddPress = () => {
         if (taskDescription) {
@@ -40,7 +34,7 @@ const Form = (props) => {
             setTaskDone(false);
             setTaskDescription("");
             setErrorMessage('')
-            props.setModalVisible(false);
+            navigation.goBack()
         }
         else {
             setErrorMessage('The description field is required.');
@@ -51,30 +45,15 @@ const Form = (props) => {
         setTaskDescription(value);
     }
 
-    return (
-        <Modal
-            animationType="slide"
-            transparent={false}
-            visible={props.modalVisible}
-            style={styles.modalContainer}
-            onRequestClose={() => {
-                props.setModalVisible(!props.modalVisible);
-            }}>
+    const navigation = useNavigation();
+    const insets = useSafeAreaInsets();
 
+    return (
+        <View style={{ paddingTop: insets.top }} >
             <View style={styles.header}>
                 <View style={styles.titleView}>
                     <Text style={styles.title}>{props.task ? 'SAVE' : 'ADD'}</Text>
                 </View>
-                <AntDesign
-                    size={24}
-                    color="black"
-                    name="closecircleo"
-                    style={styles.closeIcon}
-                    onPress={() => {
-                        setErrorMessage('')
-                        props.setModalVisible(!props.modalVisible)
-                    }}
-                />
             </View>
 
             <View style={styles.modalContainer}>
@@ -105,7 +84,7 @@ const Form = (props) => {
                     </View>
                 )}
             </View>
-        </Modal>
+        </View>          
     );
 };
 

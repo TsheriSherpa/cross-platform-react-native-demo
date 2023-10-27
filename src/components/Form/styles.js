@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
     errorMessage: {
         color: 'red',
         fontWeight: 'bold'
+    },
+    container: {
+        // marginTop: 30
     }
 });
 

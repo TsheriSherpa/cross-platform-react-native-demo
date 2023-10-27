@@ -1,30 +1,32 @@
-import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
-import Header from "./src/components/Header/Header";
 import Form from "./src/components/Form/Form";
-import Tasks from "./src/components/Tasks/Tasks";
-import styles from "./src/styles/main";
 import uuid from 'react-uuid';
 import { useState } from 'react';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Homepage from "./src/components/Homepage/Homepage";
 
 export default function App() {
 
 	const [taskToEdit, setTaskToEdit] = useState(false);
 	const [tasks, setTasks] = useState([])
-	const [modalVisible, setModalVisible] = useState(false)
 
 	const handleAddTask = (description, taskDone, id = false) => {
 
 		if (id) {
 			console.log(id)
-			setTasks(tasks =>
-				tasks.map(task =>
-					task.id == id ? { ...task, description: description, done: taskDone } : task
-				)
-			);
+
+			const updatedTasks = tasks.map(task => {
+				if (task.id === id) {
+				  return { ...task, description: description, done: taskDone }; // Modify the property you want to update
+				}
+				return task;
+			  });
+		  
+			setTasks(updatedTasks);
+			setTaskToEdit(null)
 		} else {
-			const updatedTasks = [...tasks];
-			updatedTasks.push(
+			const newTasks = [...tasks];
+			newTasks.push(
 				{
 					id: uuid(),
 					description: description,
@@ -32,34 +34,37 @@ export default function App() {
 				}
 			)
 
-			setTasks(updatedTasks)
+			setTasks(newTasks)
 		}
 	}
 
-	const handleEdit = (id) => {
-		setTaskToEdit(tasks.filter(task => task.id == id)[0])
-		setModalVisible(!modalVisible)
-	}
 
-	const handleDelete = (id) => {
-		setTasks(tasks => tasks.filter(task => task.id != id))
-	}
+	const Tab = createBottomTabNavigator();
 
 	return (
-		<View style={styles.container}>
-			<StatusBar style="auto" />
-			<Header setModalVisible={setModalVisible} />
-			<Tasks 
-				tasks={tasks} 
-				handleEdit={handleEdit} 
-				handleDelete={handleDelete}
-			/>
-			<Form
-				modalVisible={modalVisible}
-				setModalVisible={setModalVisible}
-				onAddTask={handleAddTask}
-				task={taskToEdit}
-			/>
-		</View>
+		<NavigationContainer>
+			<Tab.Navigator screenOptions={{ headerShown: false }}>
+				<Tab.Screen name="Homepage">
+					{() => 
+						<Homepage
+							onAddTask={handleAddTask}
+							setTaskToEdit={setTaskToEdit}
+							setTasks={setTasks}
+							tasks={tasks}
+
+						/>
+					}
+				</Tab.Screen>
+				<Tab.Screen name="Form">
+					{() => 
+						<Form
+							onAddTask={handleAddTask}
+							task={taskToEdit}
+						/>
+					}
+				</Tab.Screen>
+				
+			</Tab.Navigator>
+		</NavigationContainer>
 	);
 }
