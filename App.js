@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Homepage from "./src/components/Homepage/Homepage";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function App() {
 
@@ -43,10 +44,19 @@ export default function App() {
 
 	return (
 		<NavigationContainer>
-			<Tab.Navigator screenOptions={{ headerShown: false }}>
-				<Tab.Screen name="Homepage">
+			<Tab.Navigator screenOptions={{ headerShown: false, tabBarStyle: {
+				paddingBottom: 5,
+				height: 60
+			} }}>
+				<Tab.Screen name="Homepage"
+				options={{
+					tabBarLabel: 'Homepage',
+					tabBarIcon: ({ color, size }) => (
+						<Ionicons name="home" color={color} size={size} />
+					),
+				}}>
 					{() => 
-						<Homepage
+						<Homepage 
 							onAddTask={handleAddTask}
 							setTaskToEdit={setTaskToEdit}
 							setTasks={setTasks}
@@ -55,7 +65,13 @@ export default function App() {
 						/>
 					}
 				</Tab.Screen>
-				<Tab.Screen name="Form">
+				<Tab.Screen name="Form"
+					options={{
+						tabBarLabel: 'Add Todo',
+						tabBarIcon: ({ color, size }) => (
+							<Ionicons name="create" color={color} size={size} />
+						),
+					}}>
 					{() => 
 						<Form
 							onAddTask={handleAddTask}
