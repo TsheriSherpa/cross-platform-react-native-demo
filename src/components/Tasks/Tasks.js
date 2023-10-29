@@ -12,7 +12,7 @@ const Tasks = (props) => {
 	}
 
 	const handleDelete = (id) => {
-		props.setTasks(tasks => props.tasks.filter(task => task.id != id))
+		props.setTasks(tasks => tasks.filter(task => task.id != id))
 	}
 
     const navigation = useNavigation();
